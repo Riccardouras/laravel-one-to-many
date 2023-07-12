@@ -1,12 +1,11 @@
 <?php
 
+namespace App\Http\Controllers;
 
-namespace App\Http\Controllers\Admin;
-use App\Models\NomeModello;
-use App\Http\Requests\StoreNomeModelloRequest;
-use App\Http\Requests\UpdateNomeModelloRequest;
-use App\Http\Controllers\Controller;
-class NomeModelloController extends Controller
+use Illuminate\Http\Request;
+use App\Models\Project;
+
+class ProjectController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -31,10 +30,10 @@ class NomeModelloController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \App\Http\Requests\StoreNomeModelloRequest  $request
+     * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(StoreNomeModelloRequest $request)
+    public function store(Request $request)
     {
         //
     }
@@ -42,21 +41,23 @@ class NomeModelloController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\NomeModello  $nomeModello
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show(NomeModello $nomeModello)
+    public function show($id)
     {
-        //
+        $project = Project::findOrFail($id);
+
+    return view('projects.show', compact('project'));
     }
 
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\NomeModello  $nomeModello
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit(NomeModello $nomeModello)
+    public function edit($id)
     {
         //
     }
@@ -64,11 +65,11 @@ class NomeModelloController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \App\Http\Requests\UpdateNomeModelloRequest  $request
-     * @param  \App\Models\NomeModello  $nomeModello
+     * @param  \Illuminate\Http\Request  $request
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(UpdateNomeModelloRequest $request, NomeModello $nomeModello)
+    public function update(Request $request, $id)
     {
         //
     }
@@ -76,10 +77,10 @@ class NomeModelloController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\NomeModello  $nomeModello
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy(NomeModello $nomeModello)
+    public function destroy($id)
     {
         //
     }
