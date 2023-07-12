@@ -40,7 +40,7 @@ Route::middleware(['auth'])->prefix('admin')->name('admin.')->group(function () 
 	Route::get('/', [DashboardController::class, 'index'])->name('dashboard');
 	
 	// Admin Post CRUD
-	Route::resource('posts', PostController::class);
+	Route::resource('projects', ProjectController::class);
 });
 
 require __DIR__.'/auth.php';

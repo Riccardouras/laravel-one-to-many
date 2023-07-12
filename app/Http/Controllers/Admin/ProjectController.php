@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Project;
+use App\Models\Type;
 
 class ProjectController extends Controller
 {
@@ -24,7 +25,9 @@ class ProjectController extends Controller
      */
     public function create()
     {
-        //
+        $types = Type::all();
+
+        return view('projects.create', compact('projects'));
     }
 
     /**
@@ -35,7 +38,12 @@ class ProjectController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $validatedData = $request->validate([
+            'name' => 'required',
+            'type_id' => 'nullable|exists:types,id',
+      
+        ]);
+        return redirect()->route('projects.index')->with('success', 'Project created successfully.');
     }
 
     /**
@@ -59,7 +67,10 @@ class ProjectController extends Controller
      */
     public function edit($id)
     {
-        //
+        $project = Project::findOrFail($id);
+        $projects = Type::all();
+    
+        return view('projects.edit', compact('project', 'projects'));
     }
 
     /**
@@ -71,7 +82,22 @@ class ProjectController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $validatedData = $request->validate([
+            'name' => 'required',
+            'type_id' => 'nullable|exists:types,id',
+        ]);
+    
+        $project = Project::findOrFail($id);
+        $project->name = $validatedData['name'];
+  
+        if ($request->has('type_id')) {
+            $project->type_id = $validatedData['type_id'];
+        }
+        $project->save();
+    
+     
+    
+        return redirect()->route('projects.index')->with('success', 'Project updated successfully.');
     }
 
     /**
