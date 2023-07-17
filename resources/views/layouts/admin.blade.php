@@ -43,14 +43,14 @@
                             </li>
 
                             <li class="nav-item">
-                                <a class="nav-link text-white"  href="{{ route('admin.projects.index') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
-                                    <i class="fa-solid fa-sign-out-alt fa-lg fa-fw"></i> {{ __('index') }}
+                                <a class="nav-link text-white"  href="{{ route('admin.projects.index') }}">
+                                  index
                                 </a>
                             </li>
                             
                             <li class="nav-item">
-                                <a class="nav-link text-white"  href="{{ route('admin.projects.create') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
-                                    <i class="fa-solid fa-sign-out-alt fa-lg fa-fw"></i> {{ __('create') }}
+                                <a class="nav-link text-white"  href="{{ route('admin.projects.create') }}" >
+                                    <i class="fa-solid fa-sign-out-alt fa-lg fa-fw"></i> create
                                 </a>
                             </li>
                             <li class="nav-item">
