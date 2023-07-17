@@ -3,7 +3,8 @@
 use Illuminate\Database\Seeder;
 use App\Models\Project;
 use Faker\Generator as Faker;
-class DatabaseSeeder extends Seeder
+
+class ProjectSeeder extends Seeder
 {
     public function run(Faker $faker)
     {
