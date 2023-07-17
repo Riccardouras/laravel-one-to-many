@@ -2,7 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Admin\DashboardController;
-use App\Http\Controllers\Admin\PostController;
+use App\Http\Controllers\Admin\ProjectController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -37,7 +37,7 @@ Route::get('/dashboard', function () {
 })->middleware(['auth', 'verified'])->name('dashboard');
 Route::middleware(['auth'])->prefix('admin')->name('admin.')->group(function () {
 
-	Route::get('/', [DashboardController::class, 'index'])->name('dashboard');
+	Route::get('/admin', [DashboardController::class, 'index'])->name('dashboard');
 	
 	// Admin Post CRUD
 	Route::resource('projects', ProjectController::class);

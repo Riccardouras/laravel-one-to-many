@@ -13,8 +13,12 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('nome_modellos', function (Blueprint $table) {
+        Schema::create('projects', function (Blueprint $table) {
+            $table->foreignId('type_id')->nullable()->constrained();
             $table->id();
+            $table->string("title", 160)->unique();
+            $table->text("content")->nullable();
+            $table->string("image", 255)->nullable();
             $table->timestamps();
         });
     }
@@ -26,6 +30,7 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('nome_modellos');
+        Schema::dropIfExists('projects');
     }
+    
 };
