@@ -7,6 +7,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Project;
 use App\Models\Type;
+use App\Http\Requests\StoreNomeModelloRequest;
 
 class ProjectController extends Controller
 {
@@ -17,9 +18,10 @@ class ProjectController extends Controller
      */
     public function index()
     {
+        $projects = Project::all();
         $types = Type::all();
 
-        return view('projects.index', compact('projects'));
+        return view('admin.projects.index', compact('projects','types'));
     }
 
     /**
@@ -30,8 +32,9 @@ class ProjectController extends Controller
     public function create()
     {
         $types = Type::all();
+        $projects = Project::all();
 
-        return view('projects.create', compact('projects'));
+        return view('admin.projects.create', compact('projects','types'));
     }
 
     /**
@@ -40,16 +43,16 @@ class ProjectController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(StoreNomeModelloRequest $request)
     {
-        $validatedData = $request->validate([
-            'name' => 'required',
-            'type_id' => 'nullable|exists:types,id',
-      
-        ]);
-        return redirect()->route('projects.index')->with('success', 'Project created successfully.');
-    }
+        $data = $request->validated();
 
+        $newProject = new Project();
+        $newProject->fill($data);
+        $newProject->save();
+
+        return to_route('admin.projects.show', $newProject);
+    }
     /**
      * Display the specified resource.
      *
@@ -60,7 +63,7 @@ class ProjectController extends Controller
     {
         $project = Project::findOrFail($id);
 
-    return view('projects.show', compact('project'));
+    return view('admin.projects.show', compact('projects','types'));
     }
 
     /**
@@ -74,7 +77,7 @@ class ProjectController extends Controller
         $project = Project::findOrFail($id);
         $projects = Type::all();
     
-        return view('projects.edit', compact('project', 'projects'));
+        return view('projects.edit', compact('project','type'));
     }
 
     /**
@@ -87,7 +90,7 @@ class ProjectController extends Controller
     public function update(Request $request, $id)
     {
         $validatedData = $request->validate([
-            'name' => 'required',
+            'title' => 'required',
             'type_id' => 'nullable|exists:types,id',
         ]);
     

@@ -13,6 +13,7 @@ return new class extends Migration
      */
     public function up()
     {
+ 
         Schema::create('projects', function (Blueprint $table) {
             $table->foreignId('type_id')->nullable()->constrained();
             $table->id();
@@ -20,7 +21,7 @@ return new class extends Migration
             $table->text("content")->nullable();
             $table->string("image", 255)->nullable();
             $table->timestamps();
-            
+
         });
     }
 
