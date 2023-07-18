@@ -19,7 +19,7 @@
 
             <div class="mb-3">
 
-                <label for="inputName" class="form-label">Name</label>
+                <label for="inputTitle" class="form-label">Name</label>
                 <input name="title" type="text" class="form-control @error('title') is-invalid @enderror" id="inputName"
                     value="{{ old('title') }}">
 
