@@ -19,8 +19,8 @@
 
             <div class="mb-3">
 
-                <label for="inputTitle" class="form-label">Name</label>
-                <input name="title" type="text" class="form-control @error('title') is-invalid @enderror" id="inputName"
+                <label for="title" class="form-label">Name</label>
+                <input name="title" type="text" class="form-control @error('title') is-invalid @enderror" id="title"
                     value="{{ old('title') }}">
 
                 @error('')
@@ -33,8 +33,8 @@
             <div class="mb-3">
 
                 <label for="textareaDesc">Description</label>
-                <textarea name="description" class="form-control @error('description') is-invalid @enderror" id="textareaDesc">{{ old('description') }}</textarea>
-                @error('description')
+                <textarea name="content" class="form-control @error('content') is-invalid @enderror" id="textareaDesc">{{ old('content') }}</textarea>
+                @error('content')
                     <div class="invalid-feedback">{{ $message }}</div>
                 @enderror
 

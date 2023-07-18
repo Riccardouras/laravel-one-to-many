@@ -12,7 +12,7 @@ class ProjectSeeder extends Seeder
         for ($i = 0; $i < 50; $i++) {
             $project= new Project();
 
-            $project-> name = $faker->sentence(3);
+            $project-> title = $faker->sentence(3);
             $project-> content = $faker->text(500);
             $project-> image = $faker->imageUrl(800, 600, 'animals', true);
             $project->save();

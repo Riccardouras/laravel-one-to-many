@@ -62,8 +62,9 @@ class ProjectController extends Controller
     public function show($id)
     {
         $project = Project::findOrFail($id);
+        $type = Type::findOrFail($id);
 
-    return view('admin.projects.show', compact('projects','types'));
+    return view('admin.projects.show', compact('project','type'));
     }
 
     /**
@@ -77,7 +78,7 @@ class ProjectController extends Controller
         $project = Project::findOrFail($id);
         $projects = Type::all();
     
-        return view('projects.edit', compact('project','type'));
+        return view('admin.projects.edit', compact('project'));
     }
 
     /**

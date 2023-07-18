@@ -18,16 +18,18 @@
     </thead>
     <tbody>
         <tr>
-            <td><a href="{{route("projects.show", $projects->id)}}">{{$projects->title}}</a></td>
-            <td>{{ $projects->content }}</td>
-            <td> <img src={{"$projects->thumb"}} alt={{"$projects->title"}}></td>
-            <td>{{ $projects->type }}</td>
-            <td> <form action="{{ route('projectss.destroy', $projects) }}" method="post">
+            <td><a href="{{route("admin.projects.show", $project->id)}}">{{$project->title}}</a></td>
+            <td>{{ $project->content }}</td>
+            <td> <img src={{"$project->thumb"}} alt={{"$project->title"}}></td>
+            <td>{{ $project->type }}</td>
+            <td> <form action="{{ route('admin.projects.destroy', $project) }}" method="post">
                 @csrf
                 @method('DELETE')
                 <button type="submit" class="btn btn-danger" onclick="confirmDelete();">Delete</button>
             </form></td> 
-            <td><button class="btn btn-warning"><a class="text-white" href="{{ route('projects.edit', $projects->id)}}">Edit</a></button></td>
+            <td><button class="btn btn-warning"><a class="text-white" href="{{ route('admin.projects.edit', $project->id)}}">Edit</a></button></td>
+            <td>
+            </td>
         </tr>
     </tbody>
 </table>
