@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 use App\Models\Project;
 use App\Models\Type;
 use App\Http\Requests\StoreNomeModelloRequest;
+use App\Http\Requests\UpdateType;
 
 class ProjectController extends Controller
 {
@@ -51,7 +52,7 @@ class ProjectController extends Controller
         $newProject->fill($data);
         $newProject->save();
 
-        return to_route('admin.projects.show', $newProject);
+        return view('admin.projects.show', compact('newProject'));
     }
     /**
      * Display the specified resource.
@@ -60,25 +61,21 @@ class ProjectController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function show($id)
-    {
-        $project = Project::findOrFail($id);
-        $type = Type::findOrFail($id);
-
-    return view('admin.projects.show', compact('project','type'));
-    }
-
+{
+    $project = Project::findfindOrFail($id);
+    return view('admin.projects.show', compact('project'));
+}
     /**
      * Show the form for editing the specified resource.
      *
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Project $project)
     {
-        $project = Project::findOrFail($id);
-        $projects = Type::all();
+        $types = Type::all();
     
-        return view('admin.projects.edit', compact('project'));
+        return view('admin.projects.edit', compact('projects', 'types'));
     }
 
     /**
@@ -116,6 +113,9 @@ class ProjectController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $project = Project::findOrFail($id);
+        $project->delete();
+    
+        return redirect()->route('projects.index')->with('success', 'Project deleted successfully.');
     }
 }

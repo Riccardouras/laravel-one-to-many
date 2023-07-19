@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\ProjectController;
+use App\Http\Controllers\Admin\TypeController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -28,6 +29,7 @@ Route::middleware(['auth'])->prefix('admin')->name('admin.')->group(function () 
 	
 	// Admin Post CRUD
 	Route::resource('projects', ProjectController::class);
+	Route::resource('types', TypeController::class);
 });
 
 require __DIR__.'/auth.php';
