@@ -73,9 +73,8 @@ class ProjectController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit(Project $project)
+    public function edit(Project $projects, $types)
     {
-        $types = Type::all();
     
         return view('admin.projects.edit', compact('projects', 'types'));
     }
@@ -91,6 +90,8 @@ class ProjectController extends Controller
     {
         $validatedData = $request->validate([
             'title' => 'required',
+            'image'=> 'required',
+            'content'=>'required',
             'type_id' => 'nullable|exists:types,id',
         ]);
     

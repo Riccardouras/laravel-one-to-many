@@ -1,9 +1,24 @@
-<div class="form-group">
-    <label for="type_id">Type</label>
-    <select name="type_id" id="type_id" class="form-control">
-        <option value="">Select Type</option>
-        @foreach ($types as $type)
-            <option value="{{ $type->id }}" {{ $project->type_id == $type->id ? 'selected' : '' }}>{{ $type->name }}</option>
-        @endforeach
-    </select>
-</div>
+@extends('layouts.app')projects
+@section('page-title', 'Modifica')
+@section('content')
+<form action="{{ route('admin.projects.update', ['project' => $projects->id]) }}" method="post">
+    @csrf
+    @method("PUT")
+
+    <label for="title">Titolo</label>
+    <input class="form-control @error('title') is-invalid @enderror" type="text" name="title"
+        value="{{ old('title', $projects->title) }}">
+    @error('title')
+        <span class="invalid-feedback" role="alert">
+            <strong>{{ $message }}</strong>
+        </span>
+    @enderror
+
+    <label for="content">Descrizione</label>
+    <textarea name="content" class="form-control @error('content') is-invalid @enderror" cols="30"
+        rows="5">{{ old('content', $projects->content) }}</textarea>
+    @error('content')
+        <span class="invalid-feedback" role="alert">
+            <strong>{{ $message }}</strong>
+        </span>
+    @enderror
