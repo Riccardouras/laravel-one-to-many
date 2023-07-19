@@ -15,13 +15,14 @@
             <p>Categoria: {{ $project->content }} </p>
 
         <p>types: 
-        @forelse ($types as $type)
-            <span>{{$type->name}}</span>
-        @empty
-            <span>Nessuno</span>
-        @endforelse
+            <span>{{$project->$type}}</span>
         </p>
-  
+        <form action="{{ route('project.destroy', $project) }}" method="post">
+            @csrf
+            @method('DELETE')
+            <button type="submit" class="btn btn-danger" onclick="confirmDelete();">Delete</button>
+        </form>
+        <button class="btn btn-warning"><a class="text-white" href="{{ route('comics.edit', $project->id)}}">Edit</a>
     </div>
 </div>
 

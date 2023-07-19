@@ -52,7 +52,7 @@ class ProjectController extends Controller
         $newProject->fill($data);
         $newProject->save();
 
-        return view('admin.projects.show', compact('newProject'));
+        return to_route("admin.projects.show", $newProject->id);
     }
     /**
      * Display the specified resource.
@@ -62,8 +62,10 @@ class ProjectController extends Controller
      */
     public function show($id)
 {
-    $project = Project::findfindOrFail($id);
-    return view('admin.projects.show', compact('project'));
+    $project = Project::findOrFail($id);
+    $type = $project->type; 
+
+    return view('admin.projects.show', compact('project', 'type'));
 }
     /**
      * Show the form for editing the specified resource.
@@ -102,7 +104,7 @@ class ProjectController extends Controller
     
      
     
-        return redirect()->route('projects.index')->with('success', 'Project updated successfully.');
+        return redirect()->route('admin.projects.index')->with('success', 'Project updated successfully.');
     }
 
     /**
@@ -111,11 +113,10 @@ class ProjectController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Project $project)
     {
-        $project = Project::findOrFail($id);
         $project->delete();
     
-        return redirect()->route('projects.index')->with('success', 'Project deleted successfully.');
+        return redirect()->route('admin.projects.index')->with('success', 'Project deleted successfully.');
     }
 }
