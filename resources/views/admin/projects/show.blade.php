@@ -17,12 +17,12 @@
         <p>types: 
             <span>{{$project->$type}}</span>
         </p>
-        <form action="{{ route('project.destroy', $project) }}" method="post">
+        <form action="{{ route('admin.projects.destroy', $project) }}" method="post">
             @csrf
             @method('DELETE')
             <button type="submit" class="btn btn-danger" onclick="confirmDelete();">Delete</button>
         </form>
-        <button class="btn btn-warning"><a class="text-white" href="{{ route('comics.edit', $project->id)}}">Edit</a>
+        <button class="btn btn-warning"><a class="text-white" href="{{ route('admin.projects.edit', $project->id)}}">Edit</a>
     </div>
 </div>
 
