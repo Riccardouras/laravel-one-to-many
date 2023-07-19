@@ -73,10 +73,11 @@ class ProjectController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit(Project $projects, $types)
+    public function edit($id)
     {
-    
-        return view('admin.projects.edit', compact('projects', 'types'));
+        $project = Project::findOrFail($id);
+        $types = Type::all();
+        return view('admin.projects.edit', compact('project', 'types'));
     }
 
     /**
